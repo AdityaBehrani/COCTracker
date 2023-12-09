@@ -1,0 +1,5 @@
+// secrets files
+backend/secrets.py
+
+// all log files
+*.log
