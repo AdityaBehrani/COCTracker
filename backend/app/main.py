@@ -1,24 +1,42 @@
 from flask import Flask
-from floodgate.flask import guard
 from app.set_timeout import Timeout
 from app.db import db
 import app.db.schemas
-from app.internal.constants import DATABASE_URL
-from app.internal.helpers import ip_resolver
+from app.internal.constants import PUBLIC_IP_ADDRESS, DBNAME, USER, CONNECTION, PASSWORD
 from app.internal.helpers.client_errors import method_not_allowed, not_found
 from app.routes import player
 from flask_migrate import Migrate
+import sqlalchemy
+from flask_smorest import Api
+from flask_sqlalchemy import SQLAlchemy
+from google.cloud.sql.connector import Connector, IPTypes
 
+
+# Python Connector database connection function
+def getconn():
+    with Connector() as connector:
+        conn = connector.connect(
+            CONNECTION,
+            "pymysql",
+            user=USER,
+            password=PASSWORD,
+            db=DBNAME,
+            ip_type= IPTypes.PUBLIC
+        )
+        return conn
+    
 app = Flask(__name__)  # noqa: F811
 
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db.init_app(app)
+# configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://"
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "creator": getconn
+}
 
+db.init_app(app)
 Migrate(app, db)
 
 app.url_map.strict_slashes = False
-
 
 def exit_server():
     import os
@@ -26,6 +44,9 @@ def exit_server():
     print("[debug] Exiting Server (inactive)")
     os._exit(4)
 
+@app.route("/")
+def main():
+    return "GCloud app is working"
 
 reset_timeout = Timeout(600, exit_server)
 reset_timeout.start()

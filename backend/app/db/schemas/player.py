@@ -5,6 +5,7 @@ from ..base import db
 
 
 class Player(db.Model):
+    __tablename__ = 'players'
     # pylint: disable=E1101
     player_id: int = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
     level: int = db.Column(db.Integer, nullable=False)

@@ -1,6 +1,5 @@
 from app.internal.helpers.guard import guard
 from ..schemas.player import Player
-from sqlalchemy import or_
 
 message = "Player does not exist"
 

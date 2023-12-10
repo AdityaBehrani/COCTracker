@@ -13,7 +13,15 @@ SIGNING_KEY = environ.get("JWT_SIGNING_KEY")
 TOKEN_EXPIRATION_TIME_IN_SECONDS = 60 * int(environ.get("TOKEN_EXPIRATION_TIME", 10))
 
 FLASK_SECRET = environ.get("FLASK_SECRET")
-DATABASE_URL = environ.get("DATABASE_URL").replace("postgres://", "postgresql://", 1)
+#DATABASE_URL = environ.get("DATABASE_URL").replace("postgres://", "postgresql://", 1)
+PUBLIC_IP_ADDRESS = environ.get("PUBLIC_IP_ADDRESS")
+DBNAME = environ.get("DBNAME")
+PROJECT_ID = environ.get("PROJECT_ID")
+INSTANCE_NAME = environ.get("INSTANCE_NAME")
+CONNECTION = environ.get("CONNECTION")
+USER = environ.get("USER")
+PASSWORD = environ.get("PASSWORD")
+
 REFRESH_TOKEN_SALT = environ.get("REFRESH_TOKEN_SALT")
 DISABLE_CACHING = environ.get("DISABLE_CACHING") is not None
 try:
