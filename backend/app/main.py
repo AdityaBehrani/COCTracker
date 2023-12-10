@@ -4,7 +4,7 @@ from app.db import db
 import app.db.schemas
 from app.internal.constants import PUBLIC_IP_ADDRESS, DBNAME, USER, CONNECTION, PASSWORD
 from app.internal.helpers.client_errors import method_not_allowed, not_found
-from app.routes import player
+from app.routes import player, clan, war_attack as attack
 from flask_migrate import Migrate
 import sqlalchemy
 from flask_smorest import Api
@@ -58,6 +58,8 @@ def gate_check():
 
 
 app.register_blueprint(player.router)
+app.register_blueprint(clan.router)
+app.register_blueprint(attack.router)
 
 app.register_error_handler(404, not_found)
 app.register_error_handler(405, method_not_allowed)
