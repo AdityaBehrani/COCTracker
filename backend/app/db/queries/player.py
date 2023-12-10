@@ -3,8 +3,8 @@ from ..schemas.player import Player
 
 message = "Player does not exist"
 
-def get_user_by_id(idx: int) -> Player:
-    return guard(Player.query.filter_by(player_id=idx).first(), message)
+def get_user_by_id(idx: str) -> Player:
+    return guard(Player.query.filter(Player._id == idx).first(), message)
 
 
 def search_by_townhall(level: int) -> list[Player]:

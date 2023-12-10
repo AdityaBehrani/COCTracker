@@ -7,28 +7,37 @@ from ..base import db
 class Player(db.Model):
     __tablename__ = 'players'
     # pylint: disable=E1101
-    player_id: int = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
-    level: int = db.Column(db.Integer, nullable=False)
+    _id: str = db.Column(TEXT, unique=True, nullable=False, primary_key=True)
+    player_username: str = db.Column(TEXT, nullable=False)
+    player_level: int = db.Column(db.Integer, nullable=False)
     townhall_level: int = db.Column(db.Integer, nullable=False)
-    username: str = db.Column(TEXT, nullable=False)
-
+    clan_id: str = db.Column(TEXT, unique=True, nullable=True)
+    player_country: str = db.Column(TEXT, nullable=False)
+    
+    
     def __init__(
         self,
-        player_id: int = None,
-        level: int = None,
-        townhall_level: int = None,
-        username: str = None,
+        _id = None,
+        player_username = None,
+        player_level = None,
+        townhall_level = None,
+        clan_id = None,
+        player_country = None,
     ):
-        self.player_id = player_id
-        self.level = level
+        self._id = _id
+        self.player_username = player_username
+        self.player_level = player_level
         self.townhall_level = townhall_level
-        self.username = username
+        self.clan_id = clan_id
+        self.player_country = player_country
 
     @property
     def as_json(self):
         return {
-            "player_id": self.player_id,
-            "level": self.level,
+            "_id": self._id,
+            "player_username": self.player_username,
+            "player_level": self.player_level,
             "townhall_level": self.townhall_level,
-            "username": self.username
+            "clan_id": self.clan_id,
+            "player_country": self.player_country
         }

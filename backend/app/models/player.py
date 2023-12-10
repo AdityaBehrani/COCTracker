@@ -1,8 +1,11 @@
 # pylint: disable=E0213
+from typing import Optional
 from app.models.base import CustomBase
 
 class PlayerOut(CustomBase):
-    player_id: int
-    level: int
-    townhall_level: int
-    username: str
+        _id: str
+        player_username: str
+        player_level: int
+        townhall_level: int
+        clan_id: Optional[str]
+        player_country: str
