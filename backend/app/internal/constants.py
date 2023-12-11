@@ -19,7 +19,7 @@ DBNAME = environ.get("DBNAME")
 PROJECT_ID = environ.get("PROJECT_ID")
 INSTANCE_NAME = environ.get("INSTANCE_NAME")
 CONNECTION = environ.get("CONNECTION")
-USER = environ.get("USER")
+USER_NAME = environ.get("USER")
 PASSWORD = environ.get("PASSWORD")
 
 REFRESH_TOKEN_SALT = environ.get("REFRESH_TOKEN_SALT")

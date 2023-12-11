@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:5000/';
+//const API_URL = 'http://127.0.0.1:5000/';
+const API_URL = 'http://100.69.0.225:8080';
+
 
 // queries 
 export const fetchPlayerWithId = async (id) => {

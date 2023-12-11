@@ -2,7 +2,7 @@ from flask import Flask
 from app.set_timeout import Timeout
 from app.db import db
 import app.db.schemas
-from app.internal.constants import PUBLIC_IP_ADDRESS, DBNAME, USER, CONNECTION, PASSWORD
+from app.internal.constants import PUBLIC_IP_ADDRESS, DBNAME, USER_NAME, CONNECTION, PASSWORD
 from app.internal.helpers.client_errors import method_not_allowed, not_found
 from app.routes import player, clan, war_attack as attack
 from flask_migrate import Migrate
@@ -18,7 +18,7 @@ def getconn():
         conn = connector.connect(
             CONNECTION,
             "pymysql",
-            user=USER,
+            user=USER_NAME,
             password=PASSWORD,
             db=DBNAME,
             ip_type= IPTypes.PUBLIC
@@ -27,6 +27,8 @@ def getconn():
     
 app = Flask(__name__)  # noqa: F811
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "https://fair-veld-407603.uc.r.appspot.com"}})
+
 
 # configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://"

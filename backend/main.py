@@ -7,7 +7,7 @@ from app.routes.player import create_player
 from app.db.schemas.player import Player
 
 def run_coreserver():
-    core_app.run(debug=True, port=5000)
+    core_app.run(host="0.0.0.0", debug=True, port=8080)
     
 
 if __name__ == "__main__":
