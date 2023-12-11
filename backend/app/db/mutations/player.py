@@ -51,7 +51,6 @@ def delete_old_player(player_id: str):
             cursor.close()
             connection.close()
             
-        
         return jsonify({"message": "Player deleted successfully"}), 200
     else:
         # Player not found
@@ -85,8 +84,6 @@ def increment_player_townhall(player_id: str):
 def change_player_clan(_id: str, clan_id: str):
     player = Player.query.get(_id)
     clan = Clan.query.get(clan_id)
-    
-    old_clan_id = player.clan_id
     
     if player and clan:
         player_sql = "UPDATE players SET clan_id = %s WHERE _id = %s;"

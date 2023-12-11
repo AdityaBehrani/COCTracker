@@ -10,6 +10,7 @@ def get_attacks_by_clan_id(idx: str) -> [WarAttack]:
         return guard(None, message_player)
     return WarAttack.query.filter(WarAttack.clan_id == idx).all()
 
+
 def get_attacks_by_player_id(idx: str) -> [WarAttack]:
     if not idx:
         return guard(None, message_clan)

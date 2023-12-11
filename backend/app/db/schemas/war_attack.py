@@ -7,8 +7,8 @@ class WarAttack(db.Model):
     __tablename__ = 'war_attacks'
     # pylint: disable=E1101
     _id: str = db.Column(TEXT, unique=True, nullable=False, primary_key=True)
-    player_id: str = db.Column(TEXT, db.ForeignKey('players._id'), nullable=False)
-    clan_id: str = db.Column(TEXT, db.ForeignKey('clans._id'), nullable=False)
+    player_id: str = db.Column(TEXT, db.ForeignKey('players._id'), nullable=False, primary_key=True)
+    clan_id: str = db.Column(TEXT, db.ForeignKey('clans._id'), nullable=False, primary_key=True)
     num_attack: int = db.Column(db.Integer, nullable=False)
     war_type: str = db.Column(TEXT, nullable=False)
     stars: int = db.Column(db.Integer, nullable=False)

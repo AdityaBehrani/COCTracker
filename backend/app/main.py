@@ -10,7 +10,7 @@ import sqlalchemy
 from flask_smorest import Api
 from flask_sqlalchemy import SQLAlchemy
 from google.cloud.sql.connector import Connector, IPTypes
-
+from flask_cors import CORS
 
 # Python Connector database connection function
 def getconn():
@@ -26,6 +26,7 @@ def getconn():
         return conn
     
 app = Flask(__name__)  # noqa: F811
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://"
@@ -48,7 +49,7 @@ def exit_server():
 def main():
     return "GCloud app is working"
 
-reset_timeout = Timeout(600, exit_server)
+reset_timeout = Timeout(60000, exit_server)
 reset_timeout.start()
 
 @app.before_request
